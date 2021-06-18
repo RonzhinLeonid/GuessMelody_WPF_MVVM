@@ -63,35 +63,35 @@
         <TextBlock Grid.Row ="1" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" Margin="5">Тема не выбрана</TextBlock>
         <StackPanel Grid.Row ="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel.InputBindings>
-                <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommandPl1}"/>
-                <MouseBinding Gesture="RightClick" Command="{Binding RightClickCommandPl1}"/>
+                <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommand}" CommandParameter="{Binding ElementName=Player1}"/>
+                <MouseBinding Gesture="RightClick" Command="{Binding RightClickCommand}" CommandParameter="{Binding ElementName=Player1}"/>
             </StackPanel.InputBindings>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" >Игрок 1</TextBlock>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer1}"></TextBlock>
+            <TextBlock x:Name="Player1" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer1, Mode=TwoWay}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row ="2" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel.InputBindings>
-                <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommandPl2}"/>
-                <MouseBinding Gesture="RightClick" Command="{Binding RightClickCommandPl2}"/>
+                <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommand}" CommandParameter="{Binding ElementName=Player2}"/>
+                <MouseBinding Gesture="RightClick" Command="{Binding RightClickCommand}" CommandParameter="{Binding ElementName=Player2}"/>
             </StackPanel.InputBindings>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" >Игрок 2</TextBlock>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer2}"></TextBlock>
+            <TextBlock x:Name="Player2" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer2, Mode=TwoWay}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row ="2" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel.InputBindings>
-                <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommandPl3}"/>
-                <MouseBinding Gesture="RightClick" Command="{Binding RightClickCommandPl3}"/>
+                <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommand}" CommandParameter="{Binding ElementName=Player3}"/>
+                <MouseBinding Gesture="RightClick" Command="{Binding RightClickCommand}" CommandParameter="{Binding ElementName=Player3}"/>
             </StackPanel.InputBindings>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" >Игрок 3</TextBlock>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer3}"></TextBlock>
+            <TextBlock x:Name="Player3" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer3, Mode=TwoWay}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row ="2"  Grid.Column="3" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel.InputBindings>
-                <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommandPl4}"/>
-                <MouseBinding Gesture="RightClick" Command="{Binding RightClickCommandPl4}"/>
+                <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommand}" CommandParameter="{Binding ElementName=Player4}"/>
+                <MouseBinding Gesture="RightClick" Command="{Binding RightClickCommand}" CommandParameter="{Binding ElementName=Player4}"/>
             </StackPanel.InputBindings>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" >Игрок 4</TextBlock>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer4}"></TextBlock>
+            <TextBlock x:Name="Player4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer4, Mode=TwoWay}"></TextBlock>
         </StackPanel>
         <TextBlock Grid.Row ="3" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" Margin="5">Состояние</TextBlock>
         <StackPanel Grid.Row ="4" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">

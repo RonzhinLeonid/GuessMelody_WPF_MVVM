@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace GuessMelody.ViewModel
@@ -75,91 +76,36 @@ namespace GuessMelody.ViewModel
                 }, (p) => true);
             }
         }
-        public ICommand LeftClickCommandPl1
+        /// <summary>
+        /// Команда на увеличение счета игрока
+        /// </summary>
+        public ICommand LeftClickCommand
         {
             get
             {
                 return new DelegateCommand((p) =>
                 {
-                    Debug.WriteLine("Test++");
-                    ScorePlayer1++;
+                    Debug.WriteLine(p.ToString() + " Test++");
+                    var temp = p as TextBlock;
+                    var score = Convert.ToInt32(temp.Text);
+                    temp.Text = (++score).ToString();
                 }, (p) => true);
             }
         }
-        public ICommand RightClickCommandPl1
+        /// <summary>
+        /// Команда на уменьшение счета игрока
+        /// </summary>
+        public ICommand RightClickCommand
         {
             get
             {
                 return new DelegateCommand((p) =>
                 {
-                    Debug.WriteLine("Test--");
-                    ScorePlayer1--;
-                }, (p) => true);
-            }
-        }
-        public ICommand LeftClickCommandPl2
-        {
-            get
-            {
-                return new DelegateCommand((p) =>
-                {
-                    Debug.WriteLine("Test++");
-                    ScorePlayer2++;
-                }, (p) => true);
-            }
-        }
-        public ICommand RightClickCommandPl2
-        {
-            get
-            {
-                return new DelegateCommand((p) =>
-                {
-                    Debug.WriteLine("Test--");
-                    ScorePlayer2--;
-                }, (p) => true);
-            }
-        }
-        public ICommand LeftClickCommandPl3
-        {
-            get
-            {
-                return new DelegateCommand((p) =>
-                {
-                    Debug.WriteLine("Test++");
-                    ScorePlayer3++;
-                }, (p) => true);
-            }
-        }
-        public ICommand RightClickCommandPl3
-        {
-            get
-            {
-                return new DelegateCommand((p) =>
-                {
-                    Debug.WriteLine("Test--");
-                    ScorePlayer3--;
-                }, (p) => true);
-            }
-        }
-        public ICommand LeftClickCommandPl4
-        {
-            get
-            {
-                return new DelegateCommand((p) =>
-                {
-                    Debug.WriteLine("Test++");
-                    ScorePlayer4++;
-                }, (p) => true);
-            }
-        }
-        public ICommand RightClickCommandPl4
-        {
-            get
-            {
-                return new DelegateCommand((p) =>
-                {
-                    Debug.WriteLine("Test--");
-                    ScorePlayer4--;
+                    Debug.WriteLine(p.ToString() + " Test");
+                    var temp = p as TextBlock;
+                    var score = Convert.ToInt32(temp.Text);
+                    if (score >0)
+                        temp.Text = (--score).ToString();
                 }, (p) => true);
             }
         }
