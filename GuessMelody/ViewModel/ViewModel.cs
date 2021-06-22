@@ -116,7 +116,7 @@ namespace GuessMelody.ViewModel
         //        OnPropertyChanged("RandomMusic");
         //    }
         //}
-
+        //Media element
         public ICommand OpenSetting
         {
             get

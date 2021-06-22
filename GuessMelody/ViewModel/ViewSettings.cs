@@ -152,16 +152,16 @@ namespace GuessMelody.ViewModel
                     if (loadFileDialog.ShowDialog() == true)
                     {
                         XmlSerializer formatter = new XmlSerializer(typeof(Setting));
-                        Setting settings;
                         using (FileStream fs = new FileStream(loadFileDialog.FileName, FileMode.OpenOrCreate))
                         {
-                            settings = (Setting)formatter.Deserialize(fs);
+                            Setting settings = (Setting)formatter.Deserialize(fs);
+
+                            _folderWithMusic = settings.FolderWithMusic;
+                            _timeToAnswer = settings.TimeToAnswer;
+                            _timeToMusic = settings.TimeToMusic;
+                            _pointsForAnswer = settings.PointsForAnswer;
+                            _randomMusic = settings.RandomMusic;
                         }
-                        _folderWithMusic = settings.FolderWithMusic;
-                        _timeToAnswer = settings.TimeToAnswer;
-                        _timeToMusic = settings.TimeToMusic;
-                        _pointsForAnswer = settings.PointsForAnswer;
-                        _randomMusic = settings.RandomMusic;
                     }
                 }, (p) => true);
             }
