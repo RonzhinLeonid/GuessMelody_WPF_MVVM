@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:viewmodel="clr-namespace:GuessMelody.ViewModel"
         xmlns:local="clr-namespace:GuessMelody.View"
         mc:Ignorable="d"
         Title="Настройки" Height="250" Width="450" Background="LightGray">
+    <Window.DataContext>
+        <viewmodel:ViewSettings x:Name="viewSettings"/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20*"/>
@@ -17,37 +21,37 @@
             <RowDefinition Height="30*"/>
             <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" Grid.ColumnSpan="3">
+        <Menu Grid.Row="0" Grid.ColumnSpan="2">
             <MenuItem Header="Файл">
-                <MenuItem Header="Загрузить настройки"/>
-                <MenuItem Header="Сохранить настройки"/>
+                <MenuItem Header="Загрузить настройки" Command="{Binding LoadSettings}"/>
+                <MenuItem Header="Сохранить настройки" Command="{Binding SaveSettings}"/>
                 <Separator></Separator>
                 <MenuItem Header="Выход"/>
             </MenuItem>
         </Menu>
         <StackPanel Grid.Row ="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" >Папка с музыкой:</TextBlock>
-            <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Text="E:\GeekBrains" Width="200" Margin="5,0,5,0"></TextBox>
+            <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Text="{Binding Path=FolderWithMusic, Mode=TwoWay}" Width="200" Margin="5,0,5,0"></TextBox>
             <Button Content="Обзор" Width="60" FontSize="15"></Button>
         </StackPanel>
         <StackPanel Grid.Row ="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" >Времени на ответ:</TextBlock>
-            <xctk:IntegerUpDown HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Text="5" Width="40" Margin="5,0,5,0"></xctk:IntegerUpDown>
+            <xctk:IntegerUpDown HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Text="{Binding Path=TimeToAnswer, Mode=TwoWay}" Width="40" Margin="5,0,5,0"></xctk:IntegerUpDown>
         </StackPanel>
         <StackPanel Grid.Row ="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" >Времени на музыку:</TextBlock>
-            <xctk:IntegerUpDown HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Text="30" Width="50" Margin="5,0,5,0"></xctk:IntegerUpDown>
+            <xctk:IntegerUpDown HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Text="{Binding Path=TimeToMusic, Mode=TwoWay}" Width="50" Margin="5,0,5,0"></xctk:IntegerUpDown>
         </StackPanel>
         <StackPanel Grid.Row ="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" >Баллов за правильный ответ:</TextBlock>
-            <xctk:IntegerUpDown HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Text="1" Width="40" Margin="5,0,5,0"></xctk:IntegerUpDown>
+            <xctk:IntegerUpDown HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Text="{Binding Path=PointsForAnswer, Mode=TwoWay}"  Width="40" Margin="5,0,5,0"></xctk:IntegerUpDown>
         </StackPanel>
         <StackPanel Grid.Row ="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <CheckBox IsChecked="True" Content="Воспроизведение мелодий вперемешку" FontSize="15"></CheckBox>
+            <CheckBox IsChecked="{Binding Path=RandomMusic, Mode=TwoWay}" Content="Воспроизведение мелодий вперемешку" FontSize="15"></CheckBox>
         </StackPanel>
         <StackPanel Grid.Row ="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Margin="5,0,5,0" Width="60" FontSize="15">Ок</Button>
-            <Button Margin="5,0,5,0" Width="60" FontSize="15">Отмена</Button>
+            <Button Margin="5,0,5,0" Width="60" FontSize="15" Command="{Binding OkSettings}">Ок</Button>
+            <Button Margin="5,0,5,0" Width="60" FontSize="15" Command="{Binding CanselSettings}">Отмена</Button>
         </StackPanel>
     </Grid>
 </Window>

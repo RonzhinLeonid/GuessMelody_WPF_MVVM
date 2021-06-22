@@ -9,6 +9,5 @@ namespace GuessMelody.ViewModel
     class Locator
     {
        public GuessMelody.ViewModel.ViewModel MainViewModel { get; } = new ViewModel();
-
     }
 }
