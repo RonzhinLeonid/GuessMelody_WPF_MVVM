@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace GuessMelody.ViewModel
@@ -16,6 +17,14 @@ namespace GuessMelody.ViewModel
         int _scorePlayer2 = 0;
         int _scorePlayer3 = 0;
         int _scorePlayer4 = 0;
+        
+        ViewSettings viewSettings { get; set; }
+
+        string _folderWithMusic = @"E:\GeekBrains";
+        int _timeToAnswer = 5;
+        int _timeToMusic = 30;
+        int _pointsForAnswer = 2;
+        bool _randomMusic = true;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -62,7 +71,7 @@ namespace GuessMelody.ViewModel
                 OnPropertyChanged("ScorePlayer4");
             }
         }
-
+        
         public ICommand OpenSetting
         {
             get
@@ -71,95 +80,54 @@ namespace GuessMelody.ViewModel
                 {
                     Debug.WriteLine("Test");
                     Settings settings = new Settings();
-                    settings.ShowDialog();
+                    settings.viewSettings.FolderWithMusic = _folderWithMusic;
+                    settings.viewSettings.TimeToAnswer = _timeToAnswer;
+                    settings.viewSettings.TimeToMusic = _timeToMusic;
+                    settings.viewSettings.PointsForAnswer = _pointsForAnswer;
+                    settings.viewSettings.RandomMusic = _randomMusic;
+                    //settings.ShowDialog();
+
+                    if (settings.ShowDialog() == true)
+                    {
+                        _folderWithMusic = settings.viewSettings.FolderWithMusic;
+                        _timeToAnswer = settings.viewSettings.TimeToAnswer;
+                        _timeToMusic = settings.viewSettings.TimeToMusic;
+                        _pointsForAnswer = settings.viewSettings.PointsForAnswer;
+                        _randomMusic = settings.viewSettings.RandomMusic;
+                    }
                 }, (p) => true);
             }
         }
-        public ICommand LeftClickCommandPl1
+        /// <summary>
+        /// Команда на увеличение счета игрока
+        /// </summary>
+        public ICommand LeftClickCommand
         {
             get
             {
                 return new DelegateCommand((p) =>
                 {
-                    Debug.WriteLine("Test++");
-                    ScorePlayer1++;
+                    Debug.WriteLine(p.ToString() + " Test++");
+                    var temp = p as TextBlock;
+                    var score = Convert.ToInt32(temp.Text);
+                    temp.Text = (score + _pointsForAnswer).ToString();
                 }, (p) => true);
             }
         }
-        public ICommand RightClickCommandPl1
+        /// <summary>
+        /// Команда на уменьшение счета игрока
+        /// </summary>
+        public ICommand RightClickCommand
         {
             get
             {
                 return new DelegateCommand((p) =>
                 {
-                    Debug.WriteLine("Test--");
-                    ScorePlayer1--;
-                }, (p) => true);
-            }
-        }
-        public ICommand LeftClickCommandPl2
-        {
-            get
-            {
-                return new DelegateCommand((p) =>
-                {
-                    Debug.WriteLine("Test++");
-                    ScorePlayer2++;
-                }, (p) => true);
-            }
-        }
-        public ICommand RightClickCommandPl2
-        {
-            get
-            {
-                return new DelegateCommand((p) =>
-                {
-                    Debug.WriteLine("Test--");
-                    ScorePlayer2--;
-                }, (p) => true);
-            }
-        }
-        public ICommand LeftClickCommandPl3
-        {
-            get
-            {
-                return new DelegateCommand((p) =>
-                {
-                    Debug.WriteLine("Test++");
-                    ScorePlayer3++;
-                }, (p) => true);
-            }
-        }
-        public ICommand RightClickCommandPl3
-        {
-            get
-            {
-                return new DelegateCommand((p) =>
-                {
-                    Debug.WriteLine("Test--");
-                    ScorePlayer3--;
-                }, (p) => true);
-            }
-        }
-        public ICommand LeftClickCommandPl4
-        {
-            get
-            {
-                return new DelegateCommand((p) =>
-                {
-                    Debug.WriteLine("Test++");
-                    ScorePlayer4++;
-                }, (p) => true);
-            }
-        }
-        public ICommand RightClickCommandPl4
-        {
-            get
-            {
-                return new DelegateCommand((p) =>
-                {
-                    Debug.WriteLine("Test--");
-                    ScorePlayer4--;
+                    Debug.WriteLine(p.ToString() + " Test");
+                    var temp = p as TextBlock;
+                    var score = Convert.ToInt32(temp.Text);
+                    if (score >= _pointsForAnswer)
+                        temp.Text = (score - _pointsForAnswer).ToString();
                 }, (p) => true);
             }
         }
