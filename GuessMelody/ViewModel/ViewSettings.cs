@@ -27,7 +27,7 @@ namespace GuessMelody.ViewModel
         {
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -156,11 +156,11 @@ namespace GuessMelody.ViewModel
                         {
                             Setting settings = (Setting)formatter.Deserialize(fs);
 
-                            _folderWithMusic = settings.FolderWithMusic;
-                            _timeToAnswer = settings.TimeToAnswer;
-                            _timeToMusic = settings.TimeToMusic;
-                            _pointsForAnswer = settings.PointsForAnswer;
-                            _randomMusic = settings.RandomMusic;
+                            FolderWithMusic = settings.FolderWithMusic;
+                            TimeToAnswer = settings.TimeToAnswer;
+                            TimeToMusic = settings.TimeToMusic;
+                            PointsForAnswer = settings.PointsForAnswer;
+                            RandomMusic = settings.RandomMusic;
                         }
                     }
                 }, (p) => true);
