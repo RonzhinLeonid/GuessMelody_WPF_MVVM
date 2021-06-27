@@ -7,7 +7,7 @@
         xmlns:viewmodel="clr-namespace:GuessMelody.ViewModel"
         xmlns:local="clr-namespace:GuessMelody.View"
         mc:Ignorable="d"
-        Title="Настройки" Height="250" Width="450" Background="LightGray">
+        Title="Настройки" Height="250" Width="450" Background="LightGray" x:Name="SettingForm">
     <Window.DataContext>
         <viewmodel:ViewSettings x:Name="viewSettings"/>
     </Window.DataContext>
@@ -50,8 +50,8 @@
             <CheckBox IsChecked="{Binding Path=RandomMusic, Mode=TwoWay}" Content="Воспроизведение мелодий вперемешку" FontSize="15"></CheckBox>
         </StackPanel>
         <StackPanel Grid.Row ="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Margin="5,0,5,0" Width="60" FontSize="15" Command="{Binding OkSettings}">Ок</Button>
-            <Button Margin="5,0,5,0" Width="60" FontSize="15" Command="{Binding CanselSettings}">Отмена</Button>
+            <Button CommandParameter="{Binding ElementName=SettingForm}" IsDefault="True" Margin="5,0,5,0" Width="60" FontSize="15" Command="{Binding OkSettings}">Ок</Button>
+            <Button CommandParameter="{Binding ElementName=SettingForm}" IsCancel="True" Margin="5,0,5,0" Width="60" FontSize="15" Command="{Binding CanselSettings}">Отмена</Button>
         </StackPanel>
     </Grid>
 </Window>

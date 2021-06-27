@@ -17,7 +17,7 @@ namespace GuessMelody.ViewModel
         int _scorePlayer2 = 0;
         int _scorePlayer3 = 0;
         int _scorePlayer4 = 0;
-        Settings settings = new Settings();
+        
         ViewSettings viewSettings { get; set; }
 
         string _folderWithMusic = @"E:\GeekBrains";
@@ -71,52 +71,7 @@ namespace GuessMelody.ViewModel
                 OnPropertyChanged("ScorePlayer4");
             }
         }
-        //public string FolderWithMusic
-        //{
-        //    get => _folderWithMusic;
-        //    set
-        //    {
-        //        _folderWithMusic = value;
-        //        OnPropertyChanged("FolderWithMusic");
-        //    }
-        //}
-        //public int TimeToAnswer
-        //{
-        //    get => _timeToAnswer;
-        //    set
-        //    {
-        //        _timeToAnswer = value;
-        //        OnPropertyChanged("TimeToAnswer");
-        //    }
-        //}
-        //public int TimeToMusic
-        //{
-        //    get => _timeToMusic;
-        //    set
-        //    {
-        //        _timeToMusic = value;
-        //        OnPropertyChanged("TimeToMusic");
-        //    }
-        //}
-        //public int PointsForAnswer
-        //{
-        //    get => _pointsForAnswer;
-        //    set
-        //    {
-        //        _pointsForAnswer = value;
-        //        OnPropertyChanged("PointsForAnswer");
-        //    }
-        //}
-        //public bool RandomMusic
-        //{
-        //    get => _randomMusic;
-        //    set
-        //    {
-        //        _randomMusic = value;
-        //        OnPropertyChanged("RandomMusic");
-        //    }
-        //}
-        //Media element
+        
         public ICommand OpenSetting
         {
             get
@@ -124,12 +79,22 @@ namespace GuessMelody.ViewModel
                 return new DelegateCommand((p) =>
                 {
                     Debug.WriteLine("Test");
+                    Settings settings = new Settings();
                     settings.viewSettings.FolderWithMusic = _folderWithMusic;
                     settings.viewSettings.TimeToAnswer = _timeToAnswer;
                     settings.viewSettings.TimeToMusic = _timeToMusic;
                     settings.viewSettings.PointsForAnswer = _pointsForAnswer;
                     settings.viewSettings.RandomMusic = _randomMusic;
-                    settings.ShowDialog();
+                    //settings.ShowDialog();
+
+                    if (settings.ShowDialog() == true)
+                    {
+                        _folderWithMusic = settings.viewSettings.FolderWithMusic;
+                        _timeToAnswer = settings.viewSettings.TimeToAnswer;
+                        _timeToMusic = settings.viewSettings.TimeToMusic;
+                        _pointsForAnswer = settings.viewSettings.PointsForAnswer;
+                        _randomMusic = settings.viewSettings.RandomMusic;
+                    }
                 }, (p) => true);
             }
         }

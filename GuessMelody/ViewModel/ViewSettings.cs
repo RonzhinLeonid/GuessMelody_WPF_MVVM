@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.IO;
 using System.Xml.Serialization;
 using Microsoft.Win32;
+using System.Windows;
 
 namespace GuessMelody.ViewModel
 {
@@ -84,7 +85,10 @@ namespace GuessMelody.ViewModel
                 return new DelegateCommand((p) =>
                 {
                     Debug.WriteLine("Ok Settings");
-                    p = true;
+                    var temp = p as Window;
+                    temp.DialogResult = true;
+                    temp.Close();
+                    //temp.Visibility = Visibility.Hidden;
                 }, (p) => true);
             }
         }
@@ -95,7 +99,10 @@ namespace GuessMelody.ViewModel
                 return new DelegateCommand((p) =>
                 {
                     Debug.WriteLine("Close Settings");
-                    p = true;
+                    var temp = p as Window;
+                    temp.DialogResult = false;
+                    temp.Close();
+                    //temp.Visibility = Visibility.Hidden;
                 }, (p) => true);
             }
         }
