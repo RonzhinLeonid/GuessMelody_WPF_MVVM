@@ -12,6 +12,7 @@ using System.Xml.Serialization;
 using Microsoft.Win32;
 using System.Windows;
 
+
 namespace GuessMelody.ViewModel
 {
     class ViewSettings : INotifyPropertyChanged
@@ -88,10 +89,10 @@ namespace GuessMelody.ViewModel
                     var temp = p as Window;
                     temp.DialogResult = true;
                     temp.Close();
-                    //temp.Visibility = Visibility.Hidden;
                 }, (p) => true);
             }
         }
+
         public ICommand CanselSettings
         {
             get
@@ -102,7 +103,25 @@ namespace GuessMelody.ViewModel
                     var temp = p as Window;
                     temp.DialogResult = false;
                     temp.Close();
-                    //temp.Visibility = Visibility.Hidden;
+                }, (p) => true);
+            }
+        }
+
+        public ICommand SelectFolder
+        {
+            get
+            {
+                return new DelegateCommand((p) =>
+                {
+                    Debug.WriteLine("Select Settings");
+                    var selectFoler = new System.Windows.Forms.FolderBrowserDialog();
+                    selectFoler.SelectedPath = _folderWithMusic;
+                    selectFoler.ShowNewFolderButton = false;
+
+                    if (selectFoler.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        FolderWithMusic = selectFoler.SelectedPath;
+                    }
                 }, (p) => true);
             }
         }

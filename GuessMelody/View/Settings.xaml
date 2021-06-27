@@ -32,7 +32,7 @@
         <StackPanel Grid.Row ="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" >Папка с музыкой:</TextBlock>
             <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Text="{Binding Path=FolderWithMusic, Mode=TwoWay}" Width="200" Margin="5,0,5,0"></TextBox>
-            <Button Content="Обзор" Width="60" FontSize="15"></Button>
+            <Button Command="{Binding SelectFolder}" Width="60" FontSize="15">Обзор</Button>
         </StackPanel>
         <StackPanel Grid.Row ="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" >Времени на ответ:</TextBlock>
