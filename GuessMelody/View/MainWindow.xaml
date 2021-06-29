@@ -28,32 +28,24 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Grid.ColumnSpan="4">
             <MenuItem Header="Файл">
-                <MenuItem Header="Загрузить"/>
-                <MenuItem Header="Сохранить"/>
-                <Separator></Separator>
                 <MenuItem Header="Настройки" Command="{Binding OpenSetting}"/>
                 <Separator></Separator>
                 <MenuItem Header="Выход"/>
             </MenuItem>
-            <MenuItem Header="Меню 2">
-                <MenuItem Header="Подменю 1"/>
-                <MenuItem Header="Подменю 2"/>
-                <MenuItem Header="Подменю 3"/>
-                <MenuItem Header="Подменю 4"/>
+            <MenuItem Header="Музыка">
+                <MenuItem Header="Просканировать папки" Command="{Binding ScanFolder}"/>
+                <MenuItem Header="Выбор темы"/>
+                <MenuItem Header="Случайная тема" Command="{Binding ChoosingRandomTheme}"/>
             </MenuItem>
-            <MenuItem Header="Меню 3">
-                <MenuItem Header="Подменю 1"/>
-                <MenuItem Header="Подменю 2"/>
-                <MenuItem Header="Подменю 3"/>
-                <MenuItem Header="Подменю 4"/>
+            <MenuItem Header="Игра">
+                <MenuItem Header="Старт"/>
+                <MenuItem Header="Пауза"/>
+                <MenuItem Header="Показать ответ"/>
             </MenuItem>
-            <MenuItem Header="Меню 4">
-                <MenuItem Header="Подменю 1"/>
-                <MenuItem Header="Подменю 2"/>
-                <MenuItem Header="Подменю 3"/>
-                <MenuItem Header="Подменю 4"/>
+            <MenuItem Header="Игроки">
+                <MenuItem Header="Обнулить очки" Command="{Binding ZeroScorePlayer}"/>
             </MenuItem>
-            <MenuItem Header="Меню 5">
+            <MenuItem Header="Помощь">
                 <MenuItem Header="Подменю 1"/>
                 <MenuItem Header="Подменю 2"/>
                 <MenuItem Header="Подменю 3"/>

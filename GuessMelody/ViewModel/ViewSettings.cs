@@ -79,6 +79,9 @@ namespace GuessMelody.ViewModel
             }
         }
 
+        /// <summary>
+        /// Принять настройки
+        /// </summary>
         public ICommand OkSettings
         {
             get
@@ -92,7 +95,9 @@ namespace GuessMelody.ViewModel
                 }, (p) => true);
             }
         }
-
+        /// <summary>
+        /// Отменить настройки
+        /// </summary>
         public ICommand CanselSettings
         {
             get
@@ -106,7 +111,9 @@ namespace GuessMelody.ViewModel
                 }, (p) => true);
             }
         }
-
+        /// <summary>
+        /// Выбор папки с музыкой
+        /// </summary>
         public ICommand SelectFolder
         {
             get
@@ -125,7 +132,9 @@ namespace GuessMelody.ViewModel
                 }, (p) => true);
             }
         }
-
+        /// <summary>
+        /// Сохранить настройки в файл
+        /// </summary>
         public ICommand SaveSettings
         {
             get
@@ -158,7 +167,9 @@ namespace GuessMelody.ViewModel
                 }, (p) => true);
             }
         }
-
+        /// <summary>
+        /// Загрузить настройки из файла
+        /// </summary>
         public ICommand LoadSettings
         {
             get

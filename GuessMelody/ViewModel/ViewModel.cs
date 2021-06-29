@@ -1,11 +1,14 @@
-﻿using GuessMelody.View;
+﻿using GuessMelody.Model;
+using GuessMelody.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -17,8 +20,10 @@ namespace GuessMelody.ViewModel
         int _scorePlayer2 = 0;
         int _scorePlayer3 = 0;
         int _scorePlayer4 = 0;
-        
-        ViewSettings viewSettings { get; set; }
+        static string[] _musicThemes;
+        static string _theme;
+
+        //ViewSettings viewSettings { get; set; }
 
         string _folderWithMusic = @"E:\GeekBrains";
         int _timeToAnswer = 5;
@@ -72,6 +77,9 @@ namespace GuessMelody.ViewModel
             }
         }
         
+        /// <summary>
+        /// Открытие окна настроек
+        /// </summary>
         public ICommand OpenSetting
         {
             get
@@ -85,7 +93,6 @@ namespace GuessMelody.ViewModel
                     settings.viewSettings.TimeToMusic = _timeToMusic;
                     settings.viewSettings.PointsForAnswer = _pointsForAnswer;
                     settings.viewSettings.RandomMusic = _randomMusic;
-                    //settings.ShowDialog();
 
                     if (settings.ShowDialog() == true)
                     {
@@ -129,6 +136,51 @@ namespace GuessMelody.ViewModel
                     if (score >= _pointsForAnswer)
                         temp.Text = (score - _pointsForAnswer).ToString();
                 }, (p) => true);
+            }
+        }
+        /// <summary>
+        /// Обнуление очков игроков
+        /// </summary>
+        public ICommand ZeroScorePlayer
+        {
+            get
+            {
+                return new DelegateCommand((p) =>
+                {
+                    Debug.WriteLine("Обнулить очки");
+                    ScorePlayer1 = 0;
+                    ScorePlayer2 = 0;
+                    ScorePlayer3 = 0;
+                    ScorePlayer4 = 0;
+                }, (p) => true);
+            }
+        }
+        /// <summary>
+        /// Просканировать папку
+        /// </summary>
+        public ICommand ScanFolder
+        {
+            get
+            {
+                return new DelegateCommand((p) =>
+                {
+                    Debug.WriteLine("Просканировать папку");
+                    _musicThemes = MusicTheme.GetMusicThemes(_folderWithMusic);
+                }, (p) => true);
+            }
+        }
+        /// <summary>
+        /// Случайный выбор тема
+        /// </summary>
+        public ICommand ChoosingRandomTheme
+        {
+            get
+            {
+                return new DelegateCommand((p) =>
+                {
+                    Debug.WriteLine("Выбор случайной темы");
+                    _theme = MusicTheme.ChoosingRandomTheme(_musicThemes);
+                }, (p) => _musicThemes != null);
             }
         }
     }
