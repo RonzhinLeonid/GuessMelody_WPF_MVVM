@@ -11,9 +11,9 @@
         <viewmodel:ViewSelectTheme x:Name="viewSelectTheme"/>
     </Window.DataContext>
     <Grid>
-        <DataGrid x:Name="dbGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding MusicThemes}" >
+        <DataGrid x:Name="dbGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Path=MusicThemes}" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Доступные темы" Width="*" Binding="{Binding MusicThemes}"/>
+                <DataGridTextColumn Header="Доступные темы" Width="*" Binding="{Binding}"/>
             </DataGrid.Columns>
         </DataGrid>
 

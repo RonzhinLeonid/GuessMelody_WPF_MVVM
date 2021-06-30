@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace GuessMelody.ViewModel
 {
     class ViewSelectTheme
     {
-        static List<string> _musicThemes;
+        static ObservableCollection<string> _musicThemes;
         static string _theme;
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string propertyName)
@@ -22,7 +23,7 @@ namespace GuessMelody.ViewModel
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        public List<string> MusicThemes
+        public ObservableCollection<string> MusicThemes
         {
             get => _musicThemes;
             set

@@ -2,6 +2,7 @@
 using GuessMelody.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -191,7 +192,7 @@ namespace GuessMelody.ViewModel
                 {
                     Debug.WriteLine("Выбор случайной темы");
                     var selectTheme = new SelectTheme();
-                    selectTheme.viewSelectTheme.MusicThemes = _musicThemes.ToList();
+                    selectTheme.viewSelectTheme.MusicThemes = new ObservableCollection<string>(_musicThemes.ToList());
                     if (selectTheme.ShowDialog() == true)
                     {
                         _theme = selectTheme.viewSelectTheme.Themes;
