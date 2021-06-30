@@ -143,7 +143,7 @@ namespace GuessMelody.ViewModel
                 {
                     Debug.WriteLine("Save Settings");
                     Setting settings = new Setting { FolderWithMusic = _folderWithMusic, 
-                                                TimeToAnswer = _timeToAnswer, 
+                                                TimeToAnswer = _timeToAnswer,  
                                                 TimeToMusic = _timeToMusic, 
                                                 PointsForAnswer = _pointsForAnswer, 
                                                 RandomMusic = _randomMusic };

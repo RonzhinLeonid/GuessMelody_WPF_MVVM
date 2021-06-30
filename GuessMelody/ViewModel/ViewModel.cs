@@ -87,7 +87,7 @@ namespace GuessMelody.ViewModel
                 return new DelegateCommand((p) =>
                 {
                     Debug.WriteLine("Test");
-                    Settings settings = new Settings();
+                    var settings = new Settings();
                     settings.viewSettings.FolderWithMusic = _folderWithMusic;
                     settings.viewSettings.TimeToAnswer = _timeToAnswer;
                     settings.viewSettings.TimeToMusic = _timeToMusic;
@@ -180,6 +180,22 @@ namespace GuessMelody.ViewModel
                 {
                     Debug.WriteLine("Выбор случайной темы");
                     _theme = MusicTheme.ChoosingRandomTheme(_musicThemes);
+                }, (p) => _musicThemes != null);
+            }
+        }
+        public ICommand ChoosingTheme
+        {
+            get
+            {
+                return new DelegateCommand((p) =>
+                {
+                    Debug.WriteLine("Выбор случайной темы");
+                    var selectTheme = new SelectTheme();
+                    selectTheme.viewSelectTheme.MusicThemes = _musicThemes.ToList();
+                    if (selectTheme.ShowDialog() == true)
+                    {
+                        _theme = selectTheme.viewSelectTheme.Themes;
+                    }
                 }, (p) => _musicThemes != null);
             }
         }

@@ -6,12 +6,20 @@
       xmlns:viewmodel="clr-namespace:GuessMelody.ViewModel"
       xmlns:local="clr-namespace:GuessMelody.View"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Выбор темы">
+      Title="Выбор темы" Height="250" Width="450" Background="LightGray" x:Name="SelectThemeForm">
     <Window.DataContext>
         <viewmodel:ViewSelectTheme x:Name="viewSelectTheme"/>
     </Window.DataContext>
     <Grid>
-        
+        <DataGrid x:Name="dbGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding MusicThemes}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Доступные темы" Width="*" Binding="{Binding}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Button CommandParameter="{Binding ElementName=SelectThemeForm}" IsDefault="True" Margin="5,0,5,0" Width="60" FontSize="15" Command="{Binding OkSelectTheme}">Ок</Button>
+            <Button CommandParameter="{Binding ElementName=SelectThemeForm}" IsCancel="True" Margin="5,0,5,0" Width="60" FontSize="15" Command="{Binding CanselSelectTheme}">Отмена</Button>
+        </StackPanel>
     </Grid>
 </Window>

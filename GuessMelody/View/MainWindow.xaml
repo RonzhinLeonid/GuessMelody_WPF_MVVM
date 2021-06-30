@@ -34,7 +34,7 @@
             </MenuItem>
             <MenuItem Header="Музыка">
                 <MenuItem Header="Просканировать папки" Command="{Binding ScanFolder}"/>
-                <MenuItem Header="Выбор темы"/>
+                <MenuItem Header="Выбор темы" Command="{Binding ChoosingTheme}"/> 
                 <MenuItem Header="Случайная тема" Command="{Binding ChoosingRandomTheme}"/>
             </MenuItem>
             <MenuItem Header="Игра">
