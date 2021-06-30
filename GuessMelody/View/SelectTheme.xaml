@@ -13,7 +13,7 @@
     <Grid>
         <DataGrid x:Name="dbGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding MusicThemes}" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Доступные темы" Width="*" Binding="{Binding}"/>
+                <DataGridTextColumn Header="Доступные темы" Width="*" Binding="{Binding MusicThemes}"/>
             </DataGrid.Columns>
         </DataGrid>
 
