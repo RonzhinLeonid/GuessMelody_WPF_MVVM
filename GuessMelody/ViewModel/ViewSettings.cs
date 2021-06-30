@@ -147,23 +147,7 @@ namespace GuessMelody.ViewModel
                                                 TimeToMusic = _timeToMusic, 
                                                 PointsForAnswer = _pointsForAnswer, 
                                                 RandomMusic = _randomMusic };
-                    XmlSerializer formatter = new XmlSerializer(typeof(Setting));
-
-                    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.Title = "Save Files";
-                    saveFileDialog.FileName = "Settings";
-                    saveFileDialog.DefaultExt = "xml";
-                    saveFileDialog.Filter = "XML files(.xml)|*.xml|all Files(*.*)|*.*";
-                    saveFileDialog.InitialDirectory = @"C:\"; 
-                    saveFileDialog.FilterIndex = 1;
-
-                    if (saveFileDialog.ShowDialog() == true)
-                    {
-                        using (FileStream fs = new FileStream(saveFileDialog.FileName, FileMode.OpenOrCreate))
-                        {
-                            formatter.Serialize(fs, settings);
-                        }
-                    }
+                    WorkWithSettigs.SaveSetting(settings);
                 }, (p) => true);
             }
         }
@@ -178,27 +162,14 @@ namespace GuessMelody.ViewModel
                 {
                     Debug.WriteLine("Load Settings");
 
-                    OpenFileDialog loadFileDialog = new OpenFileDialog();
-                    loadFileDialog.Title = "Load Files";
-                    loadFileDialog.FileName = "Settings";
-                    loadFileDialog.DefaultExt = "xml";
-                    loadFileDialog.Filter = "XML files(.xml)|*.xml|all Files(*.*)|*.*";
-                    loadFileDialog.InitialDirectory = @"C:\";
-                    loadFileDialog.FilterIndex = 1;
-
-                    if (loadFileDialog.ShowDialog() == true)
+                    var settings =  WorkWithSettigs.LoadSetting();
+                    if (settings != null)
                     {
-                        XmlSerializer formatter = new XmlSerializer(typeof(Setting));
-                        using (FileStream fs = new FileStream(loadFileDialog.FileName, FileMode.OpenOrCreate))
-                        {
-                            Setting settings = (Setting)formatter.Deserialize(fs);
-
-                            FolderWithMusic = settings.FolderWithMusic;
-                            TimeToAnswer = settings.TimeToAnswer;
-                            TimeToMusic = settings.TimeToMusic;
-                            PointsForAnswer = settings.PointsForAnswer;
-                            RandomMusic = settings.RandomMusic;
-                        }
+                        FolderWithMusic = settings.FolderWithMusic;
+                        TimeToAnswer = settings.TimeToAnswer;
+                        TimeToMusic = settings.TimeToMusic;
+                        PointsForAnswer = settings.PointsForAnswer;
+                        RandomMusic = settings.RandomMusic;
                     }
                 }, (p) => true);
             }

@@ -99,6 +99,7 @@
     <Compile Include="Model\MusicTheme.cs" />
     <Compile Include="Model\GameGuessMelody.cs" />
     <Compile Include="Model\Setting.cs" />
+    <Compile Include="Model\WorkWithSettigs.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\Locator.cs" />
     <Compile Include="ViewModel\ViewSelectTheme.cs" />
