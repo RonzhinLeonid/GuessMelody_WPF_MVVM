@@ -11,10 +11,8 @@
         <viewmodel:ViewSelectTheme x:Name="viewSelectTheme"/>
     </Window.DataContext>
     <Grid>
-        <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding Themes}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Доступные темы" Width="*"/>
-            </DataGrid.Columns>
+        <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding MusicThemes}">
+            
         </DataGrid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
             <Button CommandParameter="{Binding ElementName=SelectThemeForm}" IsDefault="True" Margin="5,0,5,0" Width="60" FontSize="15" Command="{Binding OkSelectTheme}">Ок</Button>
