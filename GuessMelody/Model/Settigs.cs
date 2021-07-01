@@ -9,15 +9,61 @@ using System.Xml.Serialization;
 
 namespace GuessMelody.Model
 {
-    static class WorkWithSettigs
+    class Settigs
     {
+        string _folderWithMusic = @"E:\GeekBrains";
+        int _timeToAnswer = 5;
+        int _timeToMusic = 30;
+        int _pointsForAnswer = 2;
+        bool _randomMusic = true;
+
+        public string FolderWithMusic
+        {
+            get => _folderWithMusic;
+            set
+            {
+                _folderWithMusic = value;
+            }
+        }
+        public int TimeToAnswer
+        {
+            get => _timeToAnswer;
+            set
+            {
+                _timeToAnswer = value;
+            }
+        }
+        public int TimeToMusic
+        {
+            get => _timeToMusic;
+            set
+            {
+                _timeToMusic = value;
+            }
+        }
+        public int PointsForAnswer
+        {
+            get => _pointsForAnswer;
+            set
+            {
+                _pointsForAnswer = value;
+            }
+        }
+        public bool RandomMusic
+        {
+            get => _randomMusic;
+            set
+            {
+                _randomMusic = value;
+            }
+        }
         /// <summary>
         /// Сохранение настроек в файл
         /// </summary>
         /// <param name="settings"></param>
-        public static void SaveSetting (Setting settings)
+        public static void SaveSetting (SettingXML settings)
         {
-            XmlSerializer formatter = new XmlSerializer(typeof(Setting));
+            XmlSerializer formatter = new XmlSerializer(typeof(SettingXML));
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = "Save Files";
@@ -40,7 +86,7 @@ namespace GuessMelody.Model
         /// Загрузка настроек из файл
         /// </summary>
         /// <param name="settings"></param>
-        public static Setting LoadSetting()
+        public static SettingXML LoadSetting()
         {
             OpenFileDialog loadFileDialog = new OpenFileDialog();
             loadFileDialog.Title = "Load Files";
@@ -52,10 +98,10 @@ namespace GuessMelody.Model
 
             if (loadFileDialog.ShowDialog() == true)
             {
-                XmlSerializer formatter = new XmlSerializer(typeof(Setting));
+                XmlSerializer formatter = new XmlSerializer(typeof(SettingXML));
                 using (FileStream fs = new FileStream(loadFileDialog.FileName, FileMode.OpenOrCreate))
                 {
-                    return (Setting)formatter.Deserialize(fs);
+                    return (SettingXML)formatter.Deserialize(fs);
                 }
             }
             return null;

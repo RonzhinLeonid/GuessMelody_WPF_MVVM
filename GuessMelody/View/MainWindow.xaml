@@ -52,7 +52,7 @@
                 <MenuItem Header="Подменю 4"/>
             </MenuItem>
         </Menu>
-        <TextBlock Grid.Row ="1" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" Margin="5">Тема не выбрана</TextBlock>
+        <TextBlock Grid.Row ="1" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" Margin="5" Text="{Binding Path=Theme}"></TextBlock>
         <StackPanel Grid.Row ="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel.InputBindings>
                 <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommand}" CommandParameter="{Binding ElementName=Player1}"/>

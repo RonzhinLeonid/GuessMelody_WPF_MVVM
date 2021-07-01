@@ -13,9 +13,11 @@ namespace GuessMelody.ViewModel
 {
     class ViewSelectTheme
     {
-        static ObservableCollection<string> _musicThemes;
-        static string _theme;
+        static ObservableCollection<string> _musicThemes ;
+        static string _theme = "фвфвффв";
+
         public event PropertyChangedEventHandler PropertyChanged;
+
         public void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)

@@ -11,12 +11,11 @@
         <viewmodel:ViewSelectTheme x:Name="viewSelectTheme"/>
     </Window.DataContext>
     <Grid>
-        <DataGrid x:Name="dbGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Path=MusicThemes}" >
+        <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding Themes}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Доступные темы" Width="*" Binding="{Binding}"/>
+                <DataGridTextColumn Header="Доступные темы" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
             <Button CommandParameter="{Binding ElementName=SelectThemeForm}" IsDefault="True" Margin="5,0,5,0" Width="60" FontSize="15" Command="{Binding OkSelectTheme}">Ок</Button>
             <Button CommandParameter="{Binding ElementName=SelectThemeForm}" IsCancel="True" Margin="5,0,5,0" Width="60" FontSize="15" Command="{Binding CanselSelectTheme}">Отмена</Button>

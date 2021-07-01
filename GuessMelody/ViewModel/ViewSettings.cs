@@ -142,12 +142,12 @@ namespace GuessMelody.ViewModel
                 return new DelegateCommand((p) =>
                 {
                     Debug.WriteLine("Save Settings");
-                    Setting settings = new Setting { FolderWithMusic = _folderWithMusic, 
+                    SettingXML settings = new SettingXML { FolderWithMusic = _folderWithMusic, 
                                                 TimeToAnswer = _timeToAnswer,  
                                                 TimeToMusic = _timeToMusic, 
                                                 PointsForAnswer = _pointsForAnswer, 
                                                 RandomMusic = _randomMusic };
-                    WorkWithSettigs.SaveSetting(settings);
+                    Settigs.SaveSetting(settings);
                 }, (p) => true);
             }
         }
@@ -162,7 +162,7 @@ namespace GuessMelody.ViewModel
                 {
                     Debug.WriteLine("Load Settings");
 
-                    var settings =  WorkWithSettigs.LoadSetting();
+                    var settings =  Settigs.LoadSetting();
                     if (settings != null)
                     {
                         FolderWithMusic = settings.FolderWithMusic;

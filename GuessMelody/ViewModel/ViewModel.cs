@@ -15,22 +15,25 @@ using System.Windows.Input;
 
 namespace GuessMelody.ViewModel
 {
+
     class ViewModel : INotifyPropertyChanged
     {
-        int _scorePlayer1 = 0;
-        int _scorePlayer2 = 0;
-        int _scorePlayer3 = 0;
-        int _scorePlayer4 = 0;
-        static string[] _musicThemes;
-        static string _theme;
+        GameGuessMelody gameGuessMelody = new GameGuessMelody();
+        Settigs settigs = new Settigs();
+        //int _scorePlayer1 = 0;
+        //int _scorePlayer2 = 0;
+        //int _scorePlayer3 = 0;
+        //int _scorePlayer4 = 0;
+        //static string[] _musicThemes;
+        //static string _theme;
 
         //ViewSettings viewSettings { get; set; }
 
-        string _folderWithMusic = @"E:\GeekBrains";
-        int _timeToAnswer = 5;
-        int _timeToMusic = 30;
-        int _pointsForAnswer = 2;
-        bool _randomMusic = true;
+        //string _folderWithMusic = @"E:\GeekBrains";
+        //int _timeToAnswer = 5;
+        //int _timeToMusic = 30;
+        //int _pointsForAnswer = 2;
+        //bool _randomMusic = true;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -43,41 +46,49 @@ namespace GuessMelody.ViewModel
         }
         public int ScorePlayer1
         {
-            get => _scorePlayer1;
+            get => gameGuessMelody.ScorePlayer1;
             set
             {
-                _scorePlayer1 = value;
+                gameGuessMelody.ScorePlayer1 = value;
                 OnPropertyChanged("ScorePlayer1");
             }
         }
         public int ScorePlayer2
         {
-            get => _scorePlayer2;
+            get => gameGuessMelody.ScorePlayer2;
             set
             {
-                _scorePlayer2 = value;
+                gameGuessMelody.ScorePlayer2 = value;
                 OnPropertyChanged("ScorePlayer2");
             }
         }
         public int ScorePlayer3
         {
-            get => _scorePlayer3;
+            get => gameGuessMelody.ScorePlayer3;
             set
             {
-                _scorePlayer3 = value;
+                gameGuessMelody.ScorePlayer3 = value;
                 OnPropertyChanged("ScorePlayer3");
             }
         }
         public int ScorePlayer4
         {
-            get => _scorePlayer4;
+            get => gameGuessMelody.ScorePlayer4;
             set
             {
-                _scorePlayer4 = value;
+                gameGuessMelody.ScorePlayer4 = value;
                 OnPropertyChanged("ScorePlayer4");
             }
         }
-        
+        public string Theme
+        {
+            get => new DirectoryInfo(gameGuessMelody.Theme).Name;
+            set
+            {
+                gameGuessMelody.Theme = value;
+                OnPropertyChanged("Theme");
+            }
+        }
         /// <summary>
         /// Открытие окна настроек
         /// </summary>
@@ -89,19 +100,19 @@ namespace GuessMelody.ViewModel
                 {
                     Debug.WriteLine("Test");
                     var settings = new Settings();
-                    settings.viewSettings.FolderWithMusic = _folderWithMusic;
-                    settings.viewSettings.TimeToAnswer = _timeToAnswer;
-                    settings.viewSettings.TimeToMusic = _timeToMusic;
-                    settings.viewSettings.PointsForAnswer = _pointsForAnswer;
-                    settings.viewSettings.RandomMusic = _randomMusic;
+                    settings.viewSettings.FolderWithMusic = settigs.FolderWithMusic;
+                    settings.viewSettings.TimeToAnswer = settigs.TimeToAnswer;
+                    settings.viewSettings.TimeToMusic = settigs.TimeToMusic;
+                    settings.viewSettings.PointsForAnswer = settigs.PointsForAnswer;
+                    settings.viewSettings.RandomMusic = settigs.RandomMusic;
 
                     if (settings.ShowDialog() == true)
                     {
-                        _folderWithMusic = settings.viewSettings.FolderWithMusic;
-                        _timeToAnswer = settings.viewSettings.TimeToAnswer;
-                        _timeToMusic = settings.viewSettings.TimeToMusic;
-                        _pointsForAnswer = settings.viewSettings.PointsForAnswer;
-                        _randomMusic = settings.viewSettings.RandomMusic;
+                        settigs.FolderWithMusic = settings.viewSettings.FolderWithMusic;
+                        settigs.TimeToAnswer = settings.viewSettings.TimeToAnswer;
+                        settigs.TimeToMusic = settings.viewSettings.TimeToMusic;
+                        settigs.PointsForAnswer = settings.viewSettings.PointsForAnswer;
+                        settigs.RandomMusic = settings.viewSettings.RandomMusic;
                     }
                 }, (p) => true);
             }
@@ -118,7 +129,7 @@ namespace GuessMelody.ViewModel
                     Debug.WriteLine(p.ToString() + " Test++");
                     var temp = p as TextBlock;
                     var score = Convert.ToInt32(temp.Text);
-                    temp.Text = (score + _pointsForAnswer).ToString();
+                    temp.Text = (score + settigs.PointsForAnswer).ToString();
                 }, (p) => true);
             }
         }
@@ -134,8 +145,8 @@ namespace GuessMelody.ViewModel
                     Debug.WriteLine(p.ToString() + " Test");
                     var temp = p as TextBlock;
                     var score = Convert.ToInt32(temp.Text);
-                    if (score >= _pointsForAnswer)
-                        temp.Text = (score - _pointsForAnswer).ToString();
+                    if (score >= settigs.PointsForAnswer)
+                        temp.Text = (score - settigs.PointsForAnswer).ToString();
                 }, (p) => true);
             }
         }
@@ -166,7 +177,7 @@ namespace GuessMelody.ViewModel
                 return new DelegateCommand((p) =>
                 {
                     Debug.WriteLine("Просканировать папку");
-                    _musicThemes = MusicTheme.GetMusicThemes(_folderWithMusic);
+                    gameGuessMelody.MusicThemes = MusicTheme.GetMusicThemes(settigs.FolderWithMusic);
                 }, (p) => true);
             }
         }
@@ -180,8 +191,8 @@ namespace GuessMelody.ViewModel
                 return new DelegateCommand((p) =>
                 {
                     Debug.WriteLine("Выбор случайной темы");
-                    _theme = MusicTheme.ChoosingRandomTheme(_musicThemes);
-                }, (p) => _musicThemes != null);
+                    Theme = MusicTheme.ChoosingRandomTheme(gameGuessMelody.MusicThemes);
+                }, (p) => gameGuessMelody.MusicThemes != null);
             }
         }
         public ICommand ChoosingTheme
@@ -192,12 +203,12 @@ namespace GuessMelody.ViewModel
                 {
                     Debug.WriteLine("Выбор случайной темы");
                     var selectTheme = new SelectTheme();
-                    selectTheme.viewSelectTheme.MusicThemes = new ObservableCollection<string>(_musicThemes.ToList());
+                    selectTheme.viewSelectTheme.MusicThemes = new ObservableCollection<string>(gameGuessMelody.MusicThemes.ToList());
                     if (selectTheme.ShowDialog() == true)
                     {
-                        _theme = selectTheme.viewSelectTheme.Themes;
+                        gameGuessMelody.Theme = selectTheme.viewSelectTheme.Themes;
                     }
-                }, (p) => _musicThemes != null);
+                }, (p) => gameGuessMelody.MusicThemes != null);
             }
         }
     }
