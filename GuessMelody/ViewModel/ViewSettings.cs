@@ -17,6 +17,14 @@ namespace GuessMelody.ViewModel
 {
     class ViewSettings : INotifyPropertyChanged
     {
+        Model.Setting Setting { get; set; } = new Setting();
+
+        public ViewSettings()
+        {
+            Setting.ReadFromXML("setting.xml");
+        }
+
+
         string _folderWithMusic;
         int _timeToAnswer;
         int _timeToMusic;
@@ -89,6 +97,8 @@ namespace GuessMelody.ViewModel
                     var temp = p as Window;
                     temp.DialogResult = true;
                     temp.Close();
+                    Setting.WriteToXML("setting.xml");
+                    
                 }, (p) => true);
             }
         }

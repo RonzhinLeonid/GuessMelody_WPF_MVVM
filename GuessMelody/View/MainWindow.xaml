@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Угадай мелодию" Height="450" Width="800">
     <Window.Background>
-        <ImageBrush ImageSource="/Resources/background1.jpg" />
+        <ImageBrush ImageSource="/Resources/background1.jpg"/>
     </Window.Background>
     <Grid DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
         <Grid.ColumnDefinitions>
