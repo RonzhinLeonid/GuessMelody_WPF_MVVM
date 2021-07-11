@@ -61,9 +61,9 @@ namespace GuessMelody.Model
         /// Сохранение настроек в файл
         /// </summary>
         /// <param name="settings"></param>
-        public static void SaveSetting (SettingXML settings)
+        public static void SaveSetting (Setting settings)
         {
-            XmlSerializer formatter = new XmlSerializer(typeof(SettingXML));
+            XmlSerializer formatter = new XmlSerializer(typeof(Setting));
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = "Save Files";
@@ -86,7 +86,7 @@ namespace GuessMelody.Model
         /// Загрузка настроек из файл
         /// </summary>
         /// <param name="settings"></param>
-        public static SettingXML LoadSetting()
+        public static Setting LoadSetting()
         {
             OpenFileDialog loadFileDialog = new OpenFileDialog();
             loadFileDialog.Title = "Load Files";
@@ -98,10 +98,10 @@ namespace GuessMelody.Model
 
             if (loadFileDialog.ShowDialog() == true)
             {
-                XmlSerializer formatter = new XmlSerializer(typeof(SettingXML));
+                XmlSerializer formatter = new XmlSerializer(typeof(Setting));
                 using (FileStream fs = new FileStream(loadFileDialog.FileName, FileMode.OpenOrCreate))
                 {
-                    return (SettingXML)formatter.Deserialize(fs);
+                    return (Setting)formatter.Deserialize(fs);
                 }
             }
             return null;

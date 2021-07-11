@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GuessMelody.Model
 {
-    public class SettingXML
+    public class Setting
     {
         public string FolderWithMusic { get; set; }
         public int TimeToAnswer { get; set; }
