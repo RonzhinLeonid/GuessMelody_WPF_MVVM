@@ -12,21 +12,21 @@
     </Window.Background>
     <Grid DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25*"/>
-            <ColumnDefinition Width="25*"/>
-            <ColumnDefinition Width="25*"/>
-            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="25*" />
+            <ColumnDefinition Width="25*" />
+            <ColumnDefinition Width="25*" />
+            <ColumnDefinition Width="25*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="20*" />
+            <RowDefinition Height="40*" />
+            <RowDefinition Height="20*" />
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="20*" />
+            <RowDefinition Height="20*" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row ="1" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" Margin="5">Тема не выбрана</TextBlock>
+        <TextBlock Grid.Row ="1" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" Margin="5" Text="{Binding Theme.Name}"></TextBlock>
         <StackPanel Grid.Row ="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" >Игрок 1</TextBlock>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer1}"></TextBlock>
@@ -59,8 +59,8 @@
         <StackPanel Grid.Row ="6" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="550"/>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="550" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="1" TextAlignment="Center" Margin="20,5,20,5" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Background="Gray" FontSize="20" >Правильный ответ</TextBlock>
             </Grid>

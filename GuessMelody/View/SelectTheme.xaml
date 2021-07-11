@@ -1,0 +1,35 @@
+﻿<Window x:Class="GuessMelody.View.SelectTheme"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:viewmodel="clr-namespace:GuessMelody.ViewModel"
+      xmlns:local="clr-namespace:GuessMelody.View"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      mc:Ignorable="d"
+      Title="Выбор темы" Height="250" Width="450" Background="LightGray" x:Name="SelectThemeForm">
+    <Window.DataContext>
+        <viewmodel:ViewSelectTheme x:Name="viewSelectTheme" />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding MusicThemes}" SelectedItem="{Binding Themes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding OkSelectTheme}"
+                               CommandParameter="{Binding ElementName=SelectThemeForm}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Тема" Binding="{Binding Path=Name}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+            <Button CommandParameter="{Binding ElementName=SelectThemeForm}" IsCancel="True" Margin="3" Width="60" FontSize="15" Command="{Binding OkSelectTheme}">Ок</Button>
+            <Button CommandParameter="{Binding ElementName=SelectThemeForm}" IsCancel="True" Margin="3" Width="60" FontSize="15" Command="{Binding CanselSelectTheme}">Отмена</Button>
+        </StackPanel>
+    </Grid>
+</Window>
