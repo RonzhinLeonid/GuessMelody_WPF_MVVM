@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuessMelody.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace GuessMelody.View
     /// </summary>
     public partial class SelectTheme : Window
     {
-        public SelectTheme()
+        public SelectTheme(ViewSelectTheme _data)
         {
             InitializeComponent();
+            this.DataContext = _data;
         }
     }
 }

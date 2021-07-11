@@ -12,75 +12,75 @@
     </Window.Background>
     <Grid DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25*"/>
-            <ColumnDefinition Width="25*"/>
-            <ColumnDefinition Width="25*"/>
-            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="25*" />
+            <ColumnDefinition Width="25*" />
+            <ColumnDefinition Width="25*" />
+            <ColumnDefinition Width="25*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="20*" />
+            <RowDefinition Height="40*" />
+            <RowDefinition Height="20*" />
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="20*" />
+            <RowDefinition Height="20*" />
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Grid.ColumnSpan="4">
             <MenuItem Header="Файл">
-                <MenuItem Header="Настройки" Command="{Binding OpenSetting}"/>
+                <MenuItem Header="Настройки" Command="{Binding OpenSetting}" />
                 <Separator></Separator>
-                <MenuItem Header="Выход"/>
+                <MenuItem Header="Выход" />
             </MenuItem>
             <MenuItem Header="Музыка">
-                <MenuItem Header="Просканировать папки" Command="{Binding ScanFolder}"/>
-                <MenuItem Header="Выбор темы" Command="{Binding ChoosingTheme}"/> 
-                <MenuItem Header="Случайная тема" Command="{Binding ChoosingRandomTheme}"/>
+                <MenuItem Header="Просканировать папки" Command="{Binding ScanFolder}" />
+                <MenuItem Header="Выбор темы" Command="{Binding ChoosingTheme}" />
+                <MenuItem Header="Случайная тема" Command="{Binding ChoosingRandomTheme}" />
             </MenuItem>
             <MenuItem Header="Игра">
-                <MenuItem Header="Старт"/>
-                <MenuItem Header="Пауза"/>
-                <MenuItem Header="Показать ответ"/>
+                <MenuItem Header="Старт" />
+                <MenuItem Header="Пауза" />
+                <MenuItem Header="Показать ответ" />
             </MenuItem>
             <MenuItem Header="Игроки">
-                <MenuItem Header="Обнулить очки" Command="{Binding ZeroScorePlayer}"/>
+                <MenuItem Header="Обнулить очки" Command="{Binding ZeroScorePlayer}" />
             </MenuItem>
             <MenuItem Header="Помощь">
-                <MenuItem Header="Подменю 1"/>
-                <MenuItem Header="Подменю 2"/>
-                <MenuItem Header="Подменю 3"/>
-                <MenuItem Header="Подменю 4"/>
+                <MenuItem Header="Подменю 1" />
+                <MenuItem Header="Подменю 2" />
+                <MenuItem Header="Подменю 3" />
+                <MenuItem Header="Подменю 4" />
             </MenuItem>
         </Menu>
-        <TextBlock Grid.Row ="1" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" Margin="5" Text="{Binding Path=Theme}"></TextBlock>
+        <TextBlock Grid.Row ="1" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" Margin="5" Text="{Binding Theme.Name}"></TextBlock>
         <StackPanel Grid.Row ="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel.InputBindings>
-                <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommand}" CommandParameter="{Binding ElementName=Player1}"/>
-                <MouseBinding Gesture="RightClick" Command="{Binding RightClickCommand}" CommandParameter="{Binding ElementName=Player1}"/>
+                <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommand}" CommandParameter="{Binding ElementName=Player1}" />
+                <MouseBinding Gesture="RightClick" Command="{Binding RightClickCommand}" CommandParameter="{Binding ElementName=Player1}" />
             </StackPanel.InputBindings>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" >Игрок 1</TextBlock>
             <TextBlock x:Name="Player1" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer1, Mode=TwoWay}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row ="2" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel.InputBindings>
-                <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommand}" CommandParameter="{Binding ElementName=Player2}"/>
-                <MouseBinding Gesture="RightClick" Command="{Binding RightClickCommand}" CommandParameter="{Binding ElementName=Player2}"/>
+                <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommand}" CommandParameter="{Binding ElementName=Player2}" />
+                <MouseBinding Gesture="RightClick" Command="{Binding RightClickCommand}" CommandParameter="{Binding ElementName=Player2}" />
             </StackPanel.InputBindings>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" >Игрок 2</TextBlock>
             <TextBlock x:Name="Player2" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer2, Mode=TwoWay}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row ="2" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel.InputBindings>
-                <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommand}" CommandParameter="{Binding ElementName=Player3}"/>
-                <MouseBinding Gesture="RightClick" Command="{Binding RightClickCommand}" CommandParameter="{Binding ElementName=Player3}"/>
+                <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommand}" CommandParameter="{Binding ElementName=Player3}" />
+                <MouseBinding Gesture="RightClick" Command="{Binding RightClickCommand}" CommandParameter="{Binding ElementName=Player3}" />
             </StackPanel.InputBindings>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" >Игрок 3</TextBlock>
             <TextBlock x:Name="Player3" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer3, Mode=TwoWay}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row ="2"  Grid.Column="3" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel.InputBindings>
-                <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommand}" CommandParameter="{Binding ElementName=Player4}"/>
-                <MouseBinding Gesture="RightClick" Command="{Binding RightClickCommand}" CommandParameter="{Binding ElementName=Player4}"/>
+                <MouseBinding Gesture="LeftClick" Command="{Binding LeftClickCommand}" CommandParameter="{Binding ElementName=Player4}" />
+                <MouseBinding Gesture="RightClick" Command="{Binding RightClickCommand}" CommandParameter="{Binding ElementName=Player4}" />
             </StackPanel.InputBindings>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" >Игрок 4</TextBlock>
             <TextBlock x:Name="Player4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer4, Mode=TwoWay}"></TextBlock>
@@ -103,8 +103,8 @@
         <StackPanel Grid.Row ="6" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="550"/>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="550" />
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" Content="Показать ответ" Margin="20,5,20,5" FontSize="20" Width="160"></Button>
                 <TextBlock Grid.Column="1" TextAlignment="Center" Margin="20,5,20,5" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Background="Gray" FontSize="20" >Правильный ответ</TextBlock>

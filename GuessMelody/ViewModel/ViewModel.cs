@@ -15,11 +15,10 @@ using System.Windows.Input;
 
 namespace GuessMelody.ViewModel
 {
-
-    class ViewModel : INotifyPropertyChanged
+    internal class ViewModel : INotifyPropertyChanged
     {
-        GameGuessMelody gameGuessMelody = new GameGuessMelody();
-        Settigs settigs = new Settigs();
+        private GameGuessMelody gameGuessMelody = new GameGuessMelody();
+        private Settigs settigs = new Settigs();
         //int _scorePlayer1 = 0;
         //int _scorePlayer2 = 0;
         //int _scorePlayer3 = 0;
@@ -44,6 +43,7 @@ namespace GuessMelody.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
         public int ScorePlayer1
         {
             get => gameGuessMelody.ScorePlayer1;
@@ -53,6 +53,7 @@ namespace GuessMelody.ViewModel
                 OnPropertyChanged("ScorePlayer1");
             }
         }
+
         public int ScorePlayer2
         {
             get => gameGuessMelody.ScorePlayer2;
@@ -62,6 +63,7 @@ namespace GuessMelody.ViewModel
                 OnPropertyChanged("ScorePlayer2");
             }
         }
+
         public int ScorePlayer3
         {
             get => gameGuessMelody.ScorePlayer3;
@@ -71,6 +73,7 @@ namespace GuessMelody.ViewModel
                 OnPropertyChanged("ScorePlayer3");
             }
         }
+
         public int ScorePlayer4
         {
             get => gameGuessMelody.ScorePlayer4;
@@ -80,15 +83,17 @@ namespace GuessMelody.ViewModel
                 OnPropertyChanged("ScorePlayer4");
             }
         }
-        public string Theme
+
+        public Theme Theme
         {
-            get => new DirectoryInfo(gameGuessMelody.Theme).Name;
+            get => gameGuessMelody.Theme;
             set
             {
                 gameGuessMelody.Theme = value;
                 OnPropertyChanged("Theme");
             }
         }
+
         /// <summary>
         /// Открытие окна настроек
         /// </summary>
@@ -117,6 +122,7 @@ namespace GuessMelody.ViewModel
                 }, (p) => true);
             }
         }
+
         /// <summary>
         /// Команда на увеличение счета игрока
         /// </summary>
@@ -133,6 +139,7 @@ namespace GuessMelody.ViewModel
                 }, (p) => true);
             }
         }
+
         /// <summary>
         /// Команда на уменьшение счета игрока
         /// </summary>
@@ -150,6 +157,7 @@ namespace GuessMelody.ViewModel
                 }, (p) => true);
             }
         }
+
         /// <summary>
         /// Обнуление очков игроков
         /// </summary>
@@ -167,6 +175,7 @@ namespace GuessMelody.ViewModel
                 }, (p) => true);
             }
         }
+
         /// <summary>
         /// Просканировать папку
         /// </summary>
@@ -181,6 +190,7 @@ namespace GuessMelody.ViewModel
                 }, (p) => true);
             }
         }
+
         /// <summary>
         /// Случайный выбор тема
         /// </summary>
@@ -192,21 +202,27 @@ namespace GuessMelody.ViewModel
                 {
                     Debug.WriteLine("Выбор случайной темы");
                     Theme = MusicTheme.ChoosingRandomTheme(gameGuessMelody.MusicThemes);
+                    Debug.WriteLine(Theme.Name);
                 }, (p) => gameGuessMelody.MusicThemes != null);
             }
         }
+
         public ICommand ChoosingTheme
         {
             get
             {
                 return new DelegateCommand((p) =>
                 {
-                    Debug.WriteLine("Выбор случайной темы");
-                    var selectTheme = new SelectTheme();
-                    selectTheme.viewSelectTheme.MusicThemes = new ObservableCollection<string>(gameGuessMelody.MusicThemes.ToList());
+                    Debug.WriteLine("Выбор темы");
+                    ViewSelectTheme dataSelectTheme = new ViewSelectTheme()
+                    {
+                        MusicThemes = gameGuessMelody.MusicThemes,
+                        Themes = new Theme() { Name = gameGuessMelody.Theme.Name, Path = gameGuessMelody.Theme.Path }
+                    };
+                    var selectTheme = new SelectTheme(dataSelectTheme);
                     if (selectTheme.ShowDialog() == true)
                     {
-                        gameGuessMelody.Theme = selectTheme.viewSelectTheme.Themes;
+                        Theme = dataSelectTheme.Themes;
                     }
                 }, (p) => gameGuessMelody.MusicThemes != null);
             }

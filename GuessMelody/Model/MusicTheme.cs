@@ -8,15 +8,16 @@ using System.Windows;
 
 namespace GuessMelody.Model
 {
-    static class MusicTheme
+    internal static class MusicTheme
     {
         public static Random rnd = new Random();
+
         /// <summary>
         /// Сканирование папки
         /// </summary>
         /// <param name="folder"></param>
         /// <returns></returns>
-        public static string[] GetMusicThemes(string folder)
+        public static List<Theme> GetMusicThemes(string folder)
         {
             if (!Directory.Exists(folder))
             {
@@ -31,30 +32,28 @@ namespace GuessMelody.Model
                     MessageBox.Show("В указанной папке нет подпапок", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Information);
                     return null;
                 }
-                else return subFolder;
+                else
+                {
+                    var listTheme = new List<Theme>();
+                    foreach (var item in subFolder)
+                    {
+                        listTheme.Add(new Theme(item));
+                    }
+
+                    return listTheme;
+                }
             }
         }
+
         /// <summary>
         /// Выбор случайной темы
         /// </summary>
         /// <param name="musicThemes"></param>
         /// <returns></returns>
-        public static string ChoosingRandomTheme(string[] musicThemes)
+        public static Theme ChoosingRandomTheme(List<Theme> musicThemes)
         {
             if (musicThemes != null)
-                return musicThemes[rnd.Next(musicThemes.Length)];
-            else 
-                return null;
-        }
-        /// <summary>
-        /// Выбор темы
-        /// </summary>
-        /// <param name="musicThemes"></param>
-        /// <returns></returns>
-        public static string ChoosingTheme(string[] musicThemes)
-        {
-            if (musicThemes != null)
-                return musicThemes[rnd.Next(musicThemes.Length)];
+                return musicThemes[rnd.Next(musicThemes.Count)];
             else
                 return null;
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuessMelody.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -11,10 +12,10 @@ using System.Windows.Input;
 
 namespace GuessMelody.ViewModel
 {
-    class ViewSelectTheme
+    public class ViewSelectTheme
     {
-        static ObservableCollection<string> _musicThemes ;
-        static string _theme = "фвфвффв";
+        private static List<Theme> _musicThemes;
+        private static Theme _theme;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -25,7 +26,8 @@ namespace GuessMelody.ViewModel
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        public ObservableCollection<string> MusicThemes
+
+        public List<Theme> MusicThemes
         {
             get => _musicThemes;
             set
@@ -34,7 +36,8 @@ namespace GuessMelody.ViewModel
                 OnPropertyChanged("MusicThemes");
             }
         }
-        public string Themes
+
+        public Theme Themes
         {
             get => _theme;
             set
@@ -44,9 +47,8 @@ namespace GuessMelody.ViewModel
             }
         }
 
-
         /// <summary>
-        /// Принять настройки
+        /// Отменить настройки
         /// </summary>
         public ICommand OkSelectTheme
         {
@@ -54,13 +56,14 @@ namespace GuessMelody.ViewModel
             {
                 return new DelegateCommand((p) =>
                 {
-                    Debug.WriteLine("Ok SelectTheme");
+                    Debug.WriteLine("Double Click");
                     var temp = p as Window;
                     temp.DialogResult = true;
                     temp.Close();
                 }, (p) => true);
             }
         }
+
         /// <summary>
         /// Отменить настройки
         /// </summary>

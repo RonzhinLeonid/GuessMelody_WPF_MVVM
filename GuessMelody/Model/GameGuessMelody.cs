@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace GuessMelody.Model
 {
-    class GameGuessMelody
+    internal class GameGuessMelody
     {
-        int _scorePlayer1 = 0;
-        int _scorePlayer2 = 0;
-        int _scorePlayer3 = 0;
-        int _scorePlayer4 = 0;
-        static string[] _musicThemes;
-        static string _theme = "Тема не выбрана";
+        private int _scorePlayer1 = 0;
+        private int _scorePlayer2 = 0;
+        private int _scorePlayer3 = 0;
+        private int _scorePlayer4 = 0;
+        private static List<Theme> _musicThemes;
+        private static Theme _theme = new Theme() { Name = "Тема не задана" };
+
         public int ScorePlayer1
         {
             get => _scorePlayer1;
@@ -22,6 +23,7 @@ namespace GuessMelody.Model
                 _scorePlayer1 = value;
             }
         }
+
         public int ScorePlayer2
         {
             get => _scorePlayer2;
@@ -30,6 +32,7 @@ namespace GuessMelody.Model
                 _scorePlayer2 = value;
             }
         }
+
         public int ScorePlayer3
         {
             get => _scorePlayer3;
@@ -38,6 +41,7 @@ namespace GuessMelody.Model
                 _scorePlayer3 = value;
             }
         }
+
         public int ScorePlayer4
         {
             get => _scorePlayer4;
@@ -46,7 +50,8 @@ namespace GuessMelody.Model
                 _scorePlayer4 = value;
             }
         }
-        public string Theme
+
+        public Theme Theme
         {
             get => _theme;
             set
@@ -54,7 +59,8 @@ namespace GuessMelody.Model
                 _theme = value;
             }
         }
-        public string[] MusicThemes
+
+        public List<Theme> MusicThemes
         {
             get => _musicThemes;
             set
