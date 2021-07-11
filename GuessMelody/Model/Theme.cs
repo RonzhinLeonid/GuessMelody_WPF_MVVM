@@ -21,7 +21,14 @@ namespace GuessMelody.Model
             }
         }
 
-        public string Path => _path;
+        public string Path
+        {
+            get => _path;
+            set
+            {
+                _path = value;
+            }
+        }
 
         public Theme()
         {

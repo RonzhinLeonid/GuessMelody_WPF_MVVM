@@ -21,10 +21,9 @@ namespace GuessMelody.View
     /// </summary>
     public partial class SelectTheme : Window
     {
-        public SelectTheme(ViewSelectTheme _data)
+        public SelectTheme()
         {
             InitializeComponent();
-            this.DataContext = _data;
         }
     }
 }

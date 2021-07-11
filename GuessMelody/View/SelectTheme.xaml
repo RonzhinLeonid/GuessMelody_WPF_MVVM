@@ -8,7 +8,9 @@
       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       mc:Ignorable="d"
       Title="Выбор темы" Height="250" Width="450" Background="LightGray" x:Name="SelectThemeForm">
-
+    <Window.DataContext>
+        <viewmodel:ViewSelectTheme x:Name="viewSelectTheme" />
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />

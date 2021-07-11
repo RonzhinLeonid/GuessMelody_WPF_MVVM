@@ -214,15 +214,17 @@ namespace GuessMelody.ViewModel
                 return new DelegateCommand((p) =>
                 {
                     Debug.WriteLine("Выбор темы");
+
                     ViewSelectTheme dataSelectTheme = new ViewSelectTheme()
                     {
                         MusicThemes = gameGuessMelody.MusicThemes,
                         Themes = new Theme() { Name = gameGuessMelody.Theme.Name, Path = gameGuessMelody.Theme.Path }
                     };
-                    var selectTheme = new SelectTheme(dataSelectTheme);
+                    var selectTheme = new SelectTheme();
+                    selectTheme.DataContext = dataSelectTheme;
                     if (selectTheme.ShowDialog() == true)
                     {
-                        Theme = dataSelectTheme.Themes;
+                        Theme = selectTheme.viewSelectTheme.Themes;
                     }
                 }, (p) => gameGuessMelody.MusicThemes != null);
             }
