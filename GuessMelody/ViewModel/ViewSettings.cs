@@ -142,7 +142,7 @@ namespace GuessMelody.ViewModel
                 return new DelegateCommand((p) =>
                 {
                     Debug.WriteLine("Save Settings");
-                    SettingXML settings = new SettingXML { FolderWithMusic = _folderWithMusic, 
+                    Setting settings = new Setting { FolderWithMusic = _folderWithMusic, 
                                                 TimeToAnswer = _timeToAnswer,  
                                                 TimeToMusic = _timeToMusic, 
                                                 PointsForAnswer = _pointsForAnswer, 
