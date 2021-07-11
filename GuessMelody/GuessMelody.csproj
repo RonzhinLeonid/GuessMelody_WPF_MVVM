@@ -104,7 +104,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\MusicTheme.cs" />
     <Compile Include="Model\GameGuessMelody.cs" />
-    <Compile Include="Model\Setting.cs" />
+    <Compile Include="Model\SettingXML.cs" />
     <Compile Include="Model\Settigs.cs" />
     <Compile Include="Model\Theme.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
