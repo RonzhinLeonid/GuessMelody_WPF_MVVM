@@ -98,8 +98,8 @@
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" >05</TextBlock>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="20" >На ответ</TextBlock>
         </StackPanel>
-        <Button Grid.Row="5" Grid.Column="1" Content="Старт" Margin="20,5,20,5" FontSize="20"></Button>
-        <Button Grid.Row="5" Grid.Column="2" Content="Пауза" Margin="20,5,20,5" FontSize="20"></Button>
+        <Button Grid.Row="5" Grid.Column="1" Content="Старт" Command="{Binding PlayMusic}" Margin="20,5,20,5" FontSize="20"></Button>
+        <Button Grid.Row="5" Grid.Column="2" Content="Пауза" Command="{Binding StopMusic}" Margin="20,5,20,5" FontSize="20"></Button>
         <StackPanel Grid.Row ="6" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Grid>
                 <Grid.ColumnDefinitions>

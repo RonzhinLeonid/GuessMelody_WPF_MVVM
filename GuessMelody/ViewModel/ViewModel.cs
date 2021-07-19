@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace GuessMelody.ViewModel
 {
@@ -19,21 +20,8 @@ namespace GuessMelody.ViewModel
     {
         private GameGuessMelody gameGuessMelody = new GameGuessMelody();
         private Settigs settigs = new Settigs();
-        //int _scorePlayer1 = 0;
-        //int _scorePlayer2 = 0;
-        //int _scorePlayer3 = 0;
-        //int _scorePlayer4 = 0;
-        //static string[] _musicThemes;
-        //static string _theme;
-
-        //ViewSettings viewSettings { get; set; }
-
-        //string _folderWithMusic = @"E:\GeekBrains";
-        //int _timeToAnswer = 5;
-        //int _timeToMusic = 30;
-        //int _pointsForAnswer = 2;
-        //bool _randomMusic = true;
-
+        private MediaPlayer player = new MediaPlayer();
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)
@@ -192,7 +180,7 @@ namespace GuessMelody.ViewModel
         }
 
         /// <summary>
-        /// Случайный выбор тема
+        /// Случайный выбор темы
         /// </summary>
         public ICommand ChoosingRandomTheme
         {
@@ -202,11 +190,14 @@ namespace GuessMelody.ViewModel
                 {
                     Debug.WriteLine("Выбор случайной темы");
                     Theme = MusicTheme.ChoosingRandomTheme(gameGuessMelody.MusicThemes);
-                    Debug.WriteLine(Theme.Name);
+                    gameGuessMelody.GetListMusic();
                 }, (p) => gameGuessMelody.MusicThemes != null);
             }
         }
 
+        /// <summary>
+        /// Случайный темы
+        /// </summary>
         public ICommand ChoosingTheme
         {
             get
@@ -225,8 +216,33 @@ namespace GuessMelody.ViewModel
                     if (selectTheme.ShowDialog() == true)
                     {
                         Theme = selectTheme.viewSelectTheme.Themes;
+                        gameGuessMelody.GetListMusic();
                     }
                 }, (p) => gameGuessMelody.MusicThemes != null);
+            }
+        }
+        public ICommand PlayMusic
+        {
+            get
+            {
+                return new DelegateCommand((p) =>
+                {
+                    Debug.WriteLine("Пуск музыки");
+                    player.Open(new Uri(gameGuessMelody.GetMusic(settigs.RandomMusic), UriKind.Relative));
+                    player.Play();
+
+                }, (p) => gameGuessMelody.ListMusic.Any());
+            }
+        }
+        public ICommand StopMusic
+        {
+            get
+            {
+                return new DelegateCommand((p) =>
+                {
+                    Debug.WriteLine("Пауза музыки");
+                    player.Pause();
+                }, (p) => true);
             }
         }
     }

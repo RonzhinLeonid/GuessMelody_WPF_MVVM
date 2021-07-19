@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,8 @@ namespace GuessMelody.Model
         private int _scorePlayer4 = 0;
         private static List<Theme> _musicThemes;
         private static Theme _theme = new Theme() { Name = "Тема не задана" };
-
+        private static List<string> _listMusic = new List<string>();
+        private Random rnd = new Random();
         public int ScorePlayer1
         {
             get => _scorePlayer1;
@@ -66,6 +68,38 @@ namespace GuessMelody.Model
             set
             {
                 _musicThemes = value;
+            }
+        }
+        public List<string> ListMusic
+        {
+            get => _listMusic;
+            set
+            {
+                _listMusic = value;
+            }
+        }
+
+        public void GetListMusic()
+        {
+            if (Directory.Exists(_theme.Path))
+                _listMusic = Directory.GetFiles(_theme.Path, "*.mp3").ToList();
+        }
+
+        public string GetMusic(bool randomMusic)
+        {
+            string rez;
+            if (randomMusic)
+            {
+                int index = rnd.Next(_listMusic.Count);
+                rez = _listMusic[index];
+                _listMusic.RemoveAt(index);
+                return rez;
+            }
+            else
+            {
+                rez = _listMusic[0];
+                _listMusic.Remove(rez);
+                return rez;
             }
         }
     }
