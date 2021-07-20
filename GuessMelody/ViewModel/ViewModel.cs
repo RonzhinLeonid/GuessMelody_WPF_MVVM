@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace GuessMelody.ViewModel
 {
@@ -21,7 +22,8 @@ namespace GuessMelody.ViewModel
         private GameGuessMelody gameGuessMelody = new GameGuessMelody();
         private Settigs settigs = new Settigs();
         private MediaPlayer player = new MediaPlayer();
-        
+        private DispatcherTimer timer = new DispatcherTimer();
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)
@@ -228,22 +230,54 @@ namespace GuessMelody.ViewModel
                 return new DelegateCommand((p) =>
                 {
                     Debug.WriteLine("Пуск музыки");
-                    player.Open(new Uri(gameGuessMelody.GetMusic(settigs.RandomMusic), UriKind.Relative));
-                    player.Play();
 
-                }, (p) => gameGuessMelody.ListMusic.Any());
+                    var temp = p as Button;
+                    temp.Content = "Пауза";
+
+                    player.Open(new Uri(gameGuessMelody.GetMusic(settigs.RandomMusic), UriKind.Relative));
+
+                    timer.Interval = new TimeSpan(0, 0, settigs.TimeToMusic);
+                    timer.Tick += new EventHandler(OnTimerTick);
+
+                    player.Play();
+                    timer.Start();
+
+
+                }, (p) => gameGuessMelody.ListMusic.Any() && !timer.IsEnabled);
             }
         }
-        public ICommand StopMusic
+        public ICommand PauseMusic
         {
             get
             {
                 return new DelegateCommand((p) =>
                 {
                     Debug.WriteLine("Пауза музыки");
-                    player.Pause();
+                    var temp = p as Button;
+                    if(temp.Content.ToString() == "Пауза")
+                    {
+                        player.Pause();
+                        timer.Stop();
+                        temp.Content = "Возобновить";
+                    } 
+                    else
+                    {
+                        player.Play();
+                        timer.Start();
+                        temp.Content = "Пауза";
+                    }
+
+                   
+
                 }, (p) => true);
             }
+        }
+
+        private void OnTimerTick(object sender, EventArgs e)
+        {
+            player.Stop();
+            timer.Stop();
+            MessageBox.Show("Время истекло");
         }
     }
 }
