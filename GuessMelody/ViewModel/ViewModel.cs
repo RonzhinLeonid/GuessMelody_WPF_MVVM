@@ -266,9 +266,6 @@ namespace GuessMelody.ViewModel
                         timer.Start();
                         temp.Content = "Пауза";
                     }
-
-                   
-
                 }, (p) => true);
             }
         }
@@ -276,6 +273,7 @@ namespace GuessMelody.ViewModel
         private void OnTimerTick(object sender, EventArgs e)
         {
             player.Stop();
+            timer.Tick -= new EventHandler(OnTimerTick);
             timer.Stop();
             MessageBox.Show("Время истекло");
         }
