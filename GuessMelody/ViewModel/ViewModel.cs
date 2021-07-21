@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace GuessMelody.ViewModel
 {
@@ -19,20 +21,12 @@ namespace GuessMelody.ViewModel
     {
         private GameGuessMelody gameGuessMelody = new GameGuessMelody();
         private Settigs settigs = new Settigs();
-        //int _scorePlayer1 = 0;
-        //int _scorePlayer2 = 0;
-        //int _scorePlayer3 = 0;
-        //int _scorePlayer4 = 0;
-        //static string[] _musicThemes;
-        //static string _theme;
+        private MediaPlayer player = new MediaPlayer();
+        private DispatcherTimer timerSecond = new DispatcherTimer();
 
-        //ViewSettings viewSettings { get; set; }
-
-        //string _folderWithMusic = @"E:\GeekBrains";
-        //int _timeToAnswer = 5;
-        //int _timeToMusic = 30;
-        //int _pointsForAnswer = 2;
-        //bool _randomMusic = true;
+        private bool statusButton = true;
+        private int leftSeconds = 0;
+        private int numberMelody = 0;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -81,6 +75,24 @@ namespace GuessMelody.ViewModel
             {
                 gameGuessMelody.ScorePlayer4 = value;
                 OnPropertyChanged("ScorePlayer4");
+            }
+        }
+        public int LeftSeconds
+        {
+            get => leftSeconds;
+            set
+            {
+                leftSeconds = value;
+                OnPropertyChanged("LeftSeconds");
+            }
+        }
+        public int NumberMelody
+        {
+            get => numberMelody;
+            set
+            {
+                numberMelody = value;
+                OnPropertyChanged("NumberMelody");
             }
         }
 
@@ -192,7 +204,7 @@ namespace GuessMelody.ViewModel
         }
 
         /// <summary>
-        /// Случайный выбор тема
+        /// Случайный выбор темы
         /// </summary>
         public ICommand ChoosingRandomTheme
         {
@@ -202,11 +214,14 @@ namespace GuessMelody.ViewModel
                 {
                     Debug.WriteLine("Выбор случайной темы");
                     Theme = MusicTheme.ChoosingRandomTheme(gameGuessMelody.MusicThemes);
-                    Debug.WriteLine(Theme.Name);
+                    gameGuessMelody.GetListMusic();
                 }, (p) => gameGuessMelody.MusicThemes != null);
             }
         }
 
+        /// <summary>
+        /// Случайный темы
+        /// </summary>
         public ICommand ChoosingTheme
         {
             get
@@ -225,9 +240,74 @@ namespace GuessMelody.ViewModel
                     if (selectTheme.ShowDialog() == true)
                     {
                         Theme = selectTheme.viewSelectTheme.Themes;
+                        gameGuessMelody.GetListMusic();
                     }
                 }, (p) => gameGuessMelody.MusicThemes != null);
             }
+        }
+        public ICommand PlayMusic
+        {
+            get
+            {
+                return new DelegateCommand((p) =>
+                {
+                    Debug.WriteLine("Пуск музыки");
+
+                    ++NumberMelody;
+
+                    LeftSeconds = settigs.TimeToMusic;
+
+                    var temp = p as Button;
+                    temp.Content = "Пауза";
+                    statusButton = !statusButton;
+
+                    player.Open(new Uri(gameGuessMelody.GetMusic(settigs.RandomMusic), UriKind.Relative));
+
+                    timerSecond.Interval = new TimeSpan(0, 0, 1);
+                    timerSecond.Tick += new EventHandler(OnTimerTickSecond);
+
+                    player.Play();
+                    timerSecond.Start();
+
+                }, (p) => gameGuessMelody.ListMusic.Any() && statusButton);
+            }
+        }
+        public ICommand PauseMusic
+        {
+            get
+            {
+                return new DelegateCommand((p) =>
+                {
+                    Debug.WriteLine("Пауза музыки");
+                    var temp = p as Button;
+                    if (temp.Content.ToString() == "Пауза")
+                    {
+                        player.Pause();
+                        timerSecond.Stop();
+                        temp.Content = "Возобновить";
+                    }
+                    else
+                    {
+                        player.Play();
+                        timerSecond.Start();
+                        temp.Content = "Пауза";
+                    }
+                }, (p) => !statusButton);
+            }
+        }
+
+        private void OnTimerTickSecond(object sender, EventArgs e)
+        {
+            if (LeftSeconds == 0)
+            {
+                player.Stop();
+                timerSecond.Stop();
+                statusButton = !statusButton;
+                timerSecond.Tick -= new EventHandler(OnTimerTickSecond);
+                MessageBox.Show("Время истекло");
+            }
+            else
+                --LeftSeconds;
         }
     }
 }

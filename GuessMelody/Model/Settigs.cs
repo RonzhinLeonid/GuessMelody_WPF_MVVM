@@ -11,7 +11,7 @@ namespace GuessMelody.Model
 {
     class Settigs
     {
-        string _folderWithMusic = @"E:\GeekBrains";
+        string _folderWithMusic = @"E:\Музыка";
         int _timeToAnswer = 5;
         int _timeToMusic = 30;
         int _pointsForAnswer = 2;

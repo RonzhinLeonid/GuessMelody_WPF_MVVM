@@ -17,13 +17,12 @@ namespace GuessMelody.ViewModel
 {
     class ViewSettings : INotifyPropertyChanged
     {
-        Model.Setting Setting { get; set; } = new Setting();
+        //Setting Setting { get; set; } = new Setting();
 
         public ViewSettings()
         {
-            Setting.ReadFromXML("setting.xml");
+            //Setting.ReadFromXML("setting.xml");
         }
-
 
         string _folderWithMusic;
         int _timeToAnswer;
@@ -100,7 +99,7 @@ namespace GuessMelody.ViewModel
                     var temp = p as Window;
                     temp.DialogResult = true;
                     temp.Close();
-                    Setting.WriteToXML("setting.xml");
+                    //Setting.WriteToXML("setting.xml");
                     
                 }, (p) => true);
             }
@@ -152,12 +151,12 @@ namespace GuessMelody.ViewModel
                 return new DelegateCommand((p) =>
                 {
                     Debug.WriteLine("Save Settings");
-                    Setting settings = new Setting { FolderWithMusic = _folderWithMusic, 
+                    Setting setting = new Setting { FolderWithMusic = _folderWithMusic, 
                                                 TimeToAnswer = _timeToAnswer,  
                                                 TimeToMusic = _timeToMusic, 
                                                 PointsForAnswer = _pointsForAnswer, 
                                                 RandomMusic = _randomMusic };
-                    Settigs.SaveSetting(settings);
+                    Settigs.SaveSetting(setting);
                 }, (p) => true);
             }
         }
@@ -172,14 +171,14 @@ namespace GuessMelody.ViewModel
                 {
                     Debug.WriteLine("Load Settings");
 
-                    var settings =  Settigs.LoadSetting();
-                    if (settings != null)
+                    var setting =  Settigs.LoadSetting();
+                    if (setting != null)
                     {
-                        FolderWithMusic = settings.FolderWithMusic;
-                        TimeToAnswer = settings.TimeToAnswer;
-                        TimeToMusic = settings.TimeToMusic;
-                        PointsForAnswer = settings.PointsForAnswer;
-                        RandomMusic = settings.RandomMusic;
+                        FolderWithMusic = setting.FolderWithMusic;
+                        TimeToAnswer = setting.TimeToAnswer;
+                        TimeToMusic = setting.TimeToMusic;
+                        PointsForAnswer = setting.PointsForAnswer;
+                        RandomMusic = setting.RandomMusic;
                     }
                 }, (p) => true);
             }

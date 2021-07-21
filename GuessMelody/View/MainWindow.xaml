@@ -87,19 +87,19 @@
         </StackPanel>
         <TextBlock Grid.Row ="3" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" Margin="5">Состояние</TextBlock>
         <StackPanel Grid.Row ="4" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" >0</TextBlock>
+            <TextBlock Text="{Binding NumberMelody}" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" ></TextBlock>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="20" >№ песни</TextBlock>
         </StackPanel>
         <StackPanel Grid.Row ="4" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" >30</TextBlock>
+            <TextBlock Text="{Binding LeftSeconds}" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" ></TextBlock>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="20" >На мелодию</TextBlock>
         </StackPanel>
         <StackPanel Grid.Row ="4" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" >05</TextBlock>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="20" >На ответ</TextBlock>
         </StackPanel>
-        <Button Grid.Row="5" Grid.Column="1" Content="Старт" Margin="20,5,20,5" FontSize="20"></Button>
-        <Button Grid.Row="5" Grid.Column="2" Content="Пауза" Margin="20,5,20,5" FontSize="20"></Button>
+        <Button Grid.Row="5" Grid.Column="1" Content="Старт" Command="{Binding PlayMusic}" CommandParameter="{Binding ElementName=PauseMusic}" Margin="20,5,20,5" FontSize="20"></Button>
+        <Button x:Name="PauseMusic" Grid.Row="5" Grid.Column="2" Content="Пауза" Command="{Binding PauseMusic}" CommandParameter="{Binding ElementName=PauseMusic}" Margin="20,5,20,5" FontSize="20"></Button>
         <StackPanel Grid.Row ="6" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Grid>
                 <Grid.ColumnDefinitions>
