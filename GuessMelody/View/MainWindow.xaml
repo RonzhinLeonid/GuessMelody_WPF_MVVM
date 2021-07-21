@@ -87,11 +87,11 @@
         </StackPanel>
         <TextBlock Grid.Row ="3" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" Margin="5">Состояние</TextBlock>
         <StackPanel Grid.Row ="4" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" >0</TextBlock>
+            <TextBlock Text="{Binding NumberMelody}" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" ></TextBlock>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="20" >№ песни</TextBlock>
         </StackPanel>
         <StackPanel Grid.Row ="4" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" >30</TextBlock>
+            <TextBlock Text="{Binding LeftSeconds}" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" ></TextBlock>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="20" >На мелодию</TextBlock>
         </StackPanel>
         <StackPanel Grid.Row ="4" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">

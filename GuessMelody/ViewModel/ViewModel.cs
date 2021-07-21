@@ -22,7 +22,11 @@ namespace GuessMelody.ViewModel
         private GameGuessMelody gameGuessMelody = new GameGuessMelody();
         private Settigs settigs = new Settigs();
         private MediaPlayer player = new MediaPlayer();
-        private DispatcherTimer timer = new DispatcherTimer();
+        private DispatcherTimer timerSecond = new DispatcherTimer();
+
+        private bool statusButton = true;
+        private int leftSeconds = 0;
+        private int numberMelody = 0;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -71,6 +75,24 @@ namespace GuessMelody.ViewModel
             {
                 gameGuessMelody.ScorePlayer4 = value;
                 OnPropertyChanged("ScorePlayer4");
+            }
+        }
+        public int LeftSeconds
+        {
+            get => leftSeconds;
+            set
+            {
+                leftSeconds = value;
+                OnPropertyChanged("LeftSeconds");
+            }
+        }
+        public int NumberMelody
+        {
+            get => numberMelody;
+            set
+            {
+                numberMelody = value;
+                OnPropertyChanged("NumberMelody");
             }
         }
 
@@ -231,19 +253,23 @@ namespace GuessMelody.ViewModel
                 {
                     Debug.WriteLine("Пуск музыки");
 
+                    ++NumberMelody;
+
+                    LeftSeconds = settigs.TimeToMusic;
+
                     var temp = p as Button;
                     temp.Content = "Пауза";
+                    statusButton = !statusButton;
 
                     player.Open(new Uri(gameGuessMelody.GetMusic(settigs.RandomMusic), UriKind.Relative));
 
-                    timer.Interval = new TimeSpan(0, 0, settigs.TimeToMusic);
-                    timer.Tick += new EventHandler(OnTimerTick);
+                    timerSecond.Interval = new TimeSpan(0, 0, 1);
+                    timerSecond.Tick += new EventHandler(OnTimerTickSecond);
 
                     player.Play();
-                    timer.Start();
+                    timerSecond.Start();
 
-
-                }, (p) => gameGuessMelody.ListMusic.Any() && !timer.IsEnabled);
+                }, (p) => gameGuessMelody.ListMusic.Any() && statusButton);
             }
         }
         public ICommand PauseMusic
@@ -254,28 +280,34 @@ namespace GuessMelody.ViewModel
                 {
                     Debug.WriteLine("Пауза музыки");
                     var temp = p as Button;
-                    if(temp.Content.ToString() == "Пауза")
+                    if (temp.Content.ToString() == "Пауза")
                     {
                         player.Pause();
-                        timer.Stop();
+                        timerSecond.Stop();
                         temp.Content = "Возобновить";
-                    } 
+                    }
                     else
                     {
                         player.Play();
-                        timer.Start();
+                        timerSecond.Start();
                         temp.Content = "Пауза";
                     }
-                }, (p) => true);
+                }, (p) => !statusButton);
             }
         }
 
-        private void OnTimerTick(object sender, EventArgs e)
+        private void OnTimerTickSecond(object sender, EventArgs e)
         {
-            player.Stop();
-            timer.Tick -= new EventHandler(OnTimerTick);
-            timer.Stop();
-            MessageBox.Show("Время истекло");
+            if (LeftSeconds == 0)
+            {
+                player.Stop();
+                timerSecond.Stop();
+                statusButton = !statusButton;
+                timerSecond.Tick -= new EventHandler(OnTimerTickSecond);
+                MessageBox.Show("Время истекло");
+            }
+            else
+                --LeftSeconds;
         }
     }
 }
