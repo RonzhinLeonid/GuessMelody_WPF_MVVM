@@ -7,10 +7,15 @@
         xmlns:local="clr-namespace:GuessMelody.View"
         mc:Ignorable="d"
         Title="Угадай мелодию" Height="450" Width="800">
-    <Window.Background>
+    <!--<Window.Background>
         <ImageBrush ImageSource="/Resources/background1.jpg" />
-    </Window.Background>
+    </Window.Background>-->
     <Grid DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Background" Value="White"/>
+            </Style>
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25*" />
             <ColumnDefinition Width="25*" />
@@ -26,35 +31,35 @@
             <RowDefinition Height="20*" />
             <RowDefinition Height="20*" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row ="1" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" Margin="5" Text="{Binding Theme.Name}"></TextBlock>
+        <TextBlock Grid.Row ="1" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Margin="5" Text="{Binding Theme.Name}"></TextBlock>
         <StackPanel Grid.Row ="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" >Игрок 1</TextBlock>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer1}"></TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="25" >Игрок 1</TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="50" Text="{Binding Path=ScorePlayer1}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row ="2" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" >Игрок 2</TextBlock>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer2}"></TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="25" >Игрок 2</TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="50" Text="{Binding Path=ScorePlayer2}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row ="2" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" >Игрок 3</TextBlock>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer3}"></TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="25" >Игрок 3</TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="50" Text="{Binding Path=ScorePlayer3}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row ="2"  Grid.Column="3" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" >Игрок 4</TextBlock>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" Text="{Binding Path=ScorePlayer4}"></TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" >Игрок 4</TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="{Binding Path=ScorePlayer4}"></TextBlock>
         </StackPanel>
-        <TextBlock Grid.Row ="3" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="25" Margin="5">Состояние</TextBlock>
+        <TextBlock Grid.Row ="3" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Margin="5">Состояние</TextBlock>
         <StackPanel Grid.Row ="4" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" >0</TextBlock>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="20" >№ песни</TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" >0</TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" >№ песни</TextBlock>
         </StackPanel>
         <StackPanel Grid.Row ="4" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" >30</TextBlock>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="20" >На мелодию</TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" >30</TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" >На мелодию</TextBlock>
         </StackPanel>
         <StackPanel Grid.Row ="4" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" >05</TextBlock>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="20" >На ответ</TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="50" >05</TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="20" >На ответ</TextBlock>
         </StackPanel>
         <StackPanel Grid.Row ="6" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Grid>
